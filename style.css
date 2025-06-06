@@ -1,0 +1,312 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-color: #333;
+    --secondary-color: #5a67d8; /* A nice blue/purple for links */
+    --background-color: #f7f7f7;
+    --card-background: #ffffff;
+    --text-color: #4a4a4a;
+    --light-gray: #e2e8f0;
+    --header-font: 'Montserrat', sans-serif;
+    --body-font: 'Lato', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--body-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- Dynamic Background --- */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Puts it behind all other content */
+}
+
+/* --- Main Layout --- */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-family: var(--header-font);
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* --- Navigation --- */
+nav {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--light-gray);
+    padding-top: 1rem;
+}
+
+.nav-link {
+    font-family: var(--header-font);
+    text-decoration: none;
+    color: var(--text-color);
+    margin: 0 1rem;
+    padding: 0.5rem 0;
+    font-weight: 700;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-color);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.nav-link.active {
+    color: var(--secondary-color);
+}
+
+/* --- Page Content Styling --- */
+main {
+    background: var(--card-background);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.page {
+    display: none; /* Hide all pages by default */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.page.active {
+    display: block; /* Show only the active page */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-family: var(--header-font);
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+/* --- Home Page Specifics --- */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--light-gray);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bio {
+    flex: 1;
+}
+
+/* --- Research Page Specifics --- */
+.publication {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+.publication:last-child {
+    border-bottom: none;
+}
+
+.publication h3 {
+    font-family: var(--header-font);
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.publication .authors {
+    font-style: italic;
+    color: #666;
+    margin: 0;
+}
+
+.publication .journal {
+    font-weight: 700;
+    margin: 0.25rem 0;
+}
+
+.publication .description {
+    margin-top: 0.5rem;
+    text-align: justify;
+}
+
+.publication .links {
+    margin-top: 0.75rem;
+}
+
+.publication-link {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--secondary-color);
+    padding: 0.25rem 0.75rem;
+    margin-right: 0.5rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 16px; /* Pill-like shape */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.publication-link:hover,
+.publication-link:focus {
+    background-color: var(--secondary-color);
+    color: var(--card-background);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+/* --- CV/Button Styling --- */
+.button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+    background-color: #434190;
+    transform: translateY(-2px);
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem 1rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2rem; /* Adjust size of icon if using an icon font */
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-info {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.footer-info a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-info a:hover {
+    text-decoration: underline;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .profile-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-link {
+        margin: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+    header, main {
+        padding: 1.5rem;
+    }
+    nav {
+        display: flex;
+        justify-content: space-around;
+    }
+    .nav-link {
+        margin: 0;
+    }
+}
