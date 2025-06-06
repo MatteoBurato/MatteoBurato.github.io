@@ -18,6 +18,10 @@ body {
     line-height: 1.6;
 }
 
+p {
+  text-align: justify;
+}
+
 /* --- Dynamic Background --- */
 #particles-js {
     position: fixed;
@@ -58,6 +62,7 @@ h1 {
     font-size: 1.1rem;
     color: #666;
     margin-top: 0.5rem;
+    text-align: center;
 }
 
 /* --- Navigation --- */
@@ -182,11 +187,6 @@ h2 {
     margin: 0.25rem 0;
 }
 
-.publication .description {
-    margin-top: 0.5rem;
-    text-align: justify;
-}
-
 .publication .links {
     margin-top: 0.75rem;
 }
@@ -211,6 +211,10 @@ h2 {
     color: var(--card-background);
     border-color: var(--secondary-color);
     transform: translateY(-1px);
+}
+
+.publication .description {
+    margin-top: 0.5rem;
 }
 
 /* --- CV/Button Styling --- */
