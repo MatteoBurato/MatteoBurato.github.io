@@ -271,6 +271,7 @@ footer {
 .footer-info {
     font-size: 0.9rem;
     color: #888;
+    text-align: center;
 }
 
 .footer-info a {
