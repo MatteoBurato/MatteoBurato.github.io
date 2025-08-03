@@ -315,3 +315,164 @@ footer {
         margin: 0;
     }
 }
+
+/* --- Research Sub-Navigation --- */
+.research-sub-nav {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.sub-nav-link {
+    font-family: var(--header-font);
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.sub-nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -1px; /* Aligns with the container's border */
+    left: 0;
+    background-color: var(--secondary-color);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.sub-nav-link:hover {
+    color: var(--secondary-color);
+}
+
+.sub-nav-link:hover::after,
+.sub-nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.sub-nav-link.active {
+    color: var(--secondary-color);
+}
+
+.sub-page {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.sub-page.active {
+    display: block;
+}
+
+/* --- Research Content Specifics --- */
+.research-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.research-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.research-card h3 {
+    font-family: var(--header-font);
+    color: var(--secondary-color);
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.research-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.research-card .details {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+#wip ul, #dissertation ul, #dissertation ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.role-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.role-header h3 {
+    margin: 0;
+}
+
+.role-header .date-range {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.dissertation-chapter {
+    background: #f9f9f9;
+    border-left: 3px solid var(--secondary-color);
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 0 4px 4px 0;
+}
+
+.dissertation-chapter p {
+    margin: 0;
+}
+
+.publication-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.publication-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.publication-card h3 {
+    font-family: var(--header-font);
+    color: var(--secondary-color);
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.publication-card .authors {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.publication-card .journal {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.publication-card .description {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.publication-card .publication-link {
+    margin-top: 1rem;
+}

@@ -27,6 +27,59 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // --- Research Sub-Page Navigation Logic ---
+    const subNavLinks = document.querySelectorAll('.sub-nav-link');
+    const subPages = document.querySelectorAll('.sub-page');
+
+    function loadSubPage(pageName) {
+        const targetSubPage = document.getElementById(pageName);
+        // Load content only if the div is empty
+        if (targetSubPage && !targetSubPage.innerHTML.trim()) {
+            fetch(`${pageName}.html`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    targetSubPage.innerHTML = html;
+                }).catch(error => {
+                    console.error(`Failed to load ${pageName}.html:`, error);
+                    targetSubPage.innerHTML = '<p>Error loading content. Please try running a local web server.</p>';
+                });
+        }
+    }
+
+    // Load the default sub-page content on initial load
+    loadSubPage('dissertation');
+
+    subNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetSubPage = this.dataset.subpage;
+
+            // Load content for the clicked sub-page
+            loadSubPage(targetSubPage);
+
+            // Update active state on sub-pages
+            subPages.forEach(subPage => {
+                if (subPage.id === targetSubPage) {
+                    subPage.classList.add('active');
+                } else {
+                    subPage.classList.remove('active');
+                }
+            });
+
+            // Update active state on sub-nav links
+            subNavLinks.forEach(subNavlink => {
+                subNavlink.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+
     // --- tsParticles Initialization ---
     tsParticles.load("particles-js", {
         fpsLimit: 60,
