@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetSubPage = document.getElementById(pageName);
         // Load content only if the div is empty
         if (targetSubPage && !targetSubPage.innerHTML.trim()) {
-            fetch(`${pageName}.html`)
+            const baseUrl = window.location.href.replace('index.html', '').replace(/#$/, '');
+            fetch(`${baseUrl}${pageName}.html`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
