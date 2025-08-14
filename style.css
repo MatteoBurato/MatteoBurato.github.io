@@ -298,6 +298,27 @@ footer {
     .nav-link {
         margin: 0 0.5rem;
     }
+
+    .research-sub-nav {
+        flex-direction: column;
+        align-items: stretch;
+        border-bottom: none; /* Remove the container's border */
+    }
+
+    .sub-nav-link {
+        text-align: center;
+        border-bottom: 1px solid var(--light-gray);
+        margin: 0;
+        padding: 0.75rem 1rem; /* Adjust padding for better touch targets */
+    }
+
+    .sub-nav-link:last-child {
+        border-bottom: none;
+    }
+
+    .sub-nav-link::after {
+        bottom: 0; /* Adjust underline position */
+    }
 }
 
 @media (max-width: 480px) {
