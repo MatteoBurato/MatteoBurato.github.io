@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadSubPage(pageName) {
         const targetSubPage = document.getElementById(pageName);
         // Load content only if the div is empty
-        if (targetSubPage && !targetSubPage.innerHTML.trim()) {
+        if (targetSubPage) {
             const baseUrl = window.location.href.replace('index.html', '').replace(/#$/, '');
-            fetch(`${baseUrl}${pageName}.html`)
+            fetch(`${baseUrl}${pageName}.html?t=${new Date().getTime()}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -45,11 +45,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .then(html => {
                     targetSubPage.innerHTML = html;
+                    if (pageName === 'publications' || pageName === 'wip' || pageName === 'dissertation') {
+                        attachUnfoldEventListeners();
+                    }
                 }).catch(error => {
                     console.error(`Failed to load ${pageName}.html:`, error);
                     targetSubPage.innerHTML = '<p>Error loading content. Please try running a local web server.</p>';
                 });
         }
+    }
+
+    function attachUnfoldEventListeners() {
+        const publicationCards = document.querySelectorAll('.publication-card');
+
+        publicationCards.forEach(card => {
+            const button = card.querySelector('.unfold-button');
+            const foldableContent = card.querySelector('.foldable-content');
+
+            if (button && foldableContent) {
+                button.addEventListener('click', () => {
+                    foldableContent.classList.toggle('unfolded');
+                    button.classList.toggle('unfolded');
+                });
+            }
+        });
     }
 
     // Load the default sub-page content on initial load
@@ -80,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
         });
     });
+
+    
 
     // --- tsParticles Initialization ---
     tsParticles.load("particles-js", {
