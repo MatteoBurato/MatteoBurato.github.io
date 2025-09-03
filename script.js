@@ -24,17 +24,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLink.classList.remove('active');
             });
             this.classList.add('active');
+
+            if (targetPage === 'experience') {
+                loadSubPage('dissertation');
+            } else if (targetPage === 'research') {
+                loadSubPage('publications');
+            }
         });
     });
 
     // --- Research Sub-Page Navigation Logic ---
     const subNavLinks = document.querySelectorAll('.sub-nav-link');
-    const subPages = document.querySelectorAll('.sub-page');
 
     function loadSubPage(pageName) {
         const targetSubPage = document.getElementById(pageName);
         // Load content only if the div is empty
-        if (targetSubPage) {
+        if (targetSubPage && targetSubPage.children.length === 0) {
             const baseUrl = window.location.href.replace('index.html', '').replace(/#$/, '');
             fetch(`${baseUrl}${pageName}.html?t=${new Date().getTime()}`)
                 .then(response => {
@@ -56,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function attachUnfoldEventListeners() {
-        const publicationCards = document.querySelectorAll('.publication-card');
+        const publicationCards = document.querySelectorAll('.publication-card:not(.listeners-attached)');
 
         publicationCards.forEach(card => {
             const button = card.querySelector('.unfold-button');
@@ -67,40 +72,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     foldableContent.classList.toggle('unfolded');
                     button.classList.toggle('unfolded');
                 });
+                card.classList.add('listeners-attached');
             }
         });
     }
-
-    // Load the default sub-page content on initial load
-    loadSubPage('dissertation');
 
     subNavLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
 
-            const targetSubPage = this.dataset.subpage;
+            const targetSubPageName = this.dataset.subpage;
 
             // Load content for the clicked sub-page
-            loadSubPage(targetSubPage);
+            loadSubPage(targetSubPageName);
 
-            // Update active state on sub-pages
-            subPages.forEach(subPage => {
-                if (subPage.id === targetSubPage) {
-                    subPage.classList.add('active');
-                } else {
-                    subPage.classList.remove('active');
-                }
-            });
+            const parentPage = this.closest('.page');
+            if (parentPage) {
+                const subPagesInParent = parentPage.querySelectorAll('.sub-page');
+                subPagesInParent.forEach(subPage => {
+                    if (subPage.id === targetSubPageName) {
+                        subPage.classList.add('active');
+                    } else {
+                        subPage.classList.remove('active');
+                    }
+                });
 
-            // Update active state on sub-nav links
-            subNavLinks.forEach(subNavlink => {
-                subNavlink.classList.remove('active');
-            });
-            this.classList.add('active');
+                const subNavLinksInParent = parentPage.querySelectorAll('.sub-nav-link');
+                subNavLinksInParent.forEach(subNavlink => {
+                    subNavlink.classList.remove('active');
+                });
+                this.classList.add('active');
+            }
         });
     });
-
-    
 
     // --- tsParticles Initialization ---
     tsParticles.load("particles-js", {
