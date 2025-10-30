@@ -66,12 +66,21 @@ document.addEventListener('DOMContentLoaded', function() {
         publicationCards.forEach(card => {
             const button = card.querySelector('.unfold-button');
             const foldableContent = card.querySelector('.foldable-content');
+            const title = card.querySelector('h3');
 
             if (button && foldableContent) {
-                button.addEventListener('click', () => {
+                const toggleUnfold = () => {
                     foldableContent.classList.toggle('unfolded');
                     button.classList.toggle('unfolded');
-                });
+                };
+
+                button.addEventListener('click', toggleUnfold);
+
+                if (title) {
+                    title.classList.add('toggle-title');
+                    title.addEventListener('click', toggleUnfold);
+                }
+
                 card.classList.add('listeners-attached');
             }
         });

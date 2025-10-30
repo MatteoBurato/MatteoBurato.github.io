@@ -469,6 +469,7 @@ footer {
     line-height: 22px;
     text-align: center;
     transition: all 0.3s ease;
+    transform: rotate(180deg);
 }
 
 .publication-card .unfold-button:hover {
@@ -477,7 +478,7 @@ footer {
 }
 
 .publication-card .unfold-button.unfolded {
-    transform: rotate(180deg);
+    transform: rotate(0deg);
 }
 
 .foldable-content {
@@ -489,4 +490,19 @@ footer {
 .foldable-content.unfolded {
     max-height: 1000px; /* A large enough value to show all content */
     transition: max-height 0.5s ease-in;
+}
+
+.publication-card .toggle-title {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.1rem 0.25rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.publication-card .toggle-title:hover {
+    color: var(--secondary-color);
+    text-shadow: 0 0 16px rgba(90, 103, 216, 0.5);
+    text-decoration: underline;
 }
